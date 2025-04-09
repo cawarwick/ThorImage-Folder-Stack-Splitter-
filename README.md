@@ -20,7 +20,8 @@ For example:
 These are the folllowing variables you will need to change to run the macro.
 
 Input=”C:/path/to/where/the tiffs are/”   (note the forward slashes, if you copy from Windows Explorer they are back slashes)
-For example here we have all of our files raw from the microscope in a single folder and we have used the directory "/DRGS project/#542 3-25-25/Final FOV/Functional/Raw Files/" as the input folder as it contains all our files
+For example here we have all of our files raw from the microscope in a single folder and we have used the directory "/#542 3-25-25/Final FOV/Functional/Raw Files/" as the input folder as it contains all our files
+
 ![image](https://github.com/user-attachments/assets/a1391f32-0bfa-49c8-9198-67700ea04faa)
 
 Path=”C:/path/to/where/you/want the tiffs saved/”    (Also note the forward slash at the end, this says to look in that folder, otherwise it things it's a file.)
