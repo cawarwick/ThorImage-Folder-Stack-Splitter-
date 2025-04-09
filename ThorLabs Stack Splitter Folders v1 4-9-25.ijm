@@ -1,7 +1,7 @@
 //Before using make sure to copy the Garbage.ijm macro into the macro folder in order to remove the memory leaks
 //Also before using, go to Bio-Foramts Plugin Configuration, go to Formats tab, find TIFF (tagged image file format) and uncheck enable
 //save location. Need to change this depending on the computer and intention
-input="W:/DRGS project/#541 3-22-25/Time Lapse/Final FOV/Functional/Doubles/raw Doubles/" //where the folders to process are located. Make sure they are forward slashes and it ends with a forward slash.
+input="W:/DRGS project/#541 3-22-25/Time Lapse/Final FOV/Functional/Doubles/raw Doubles/" //where the files to process are located. Make sure they are forward slashes and it ends with a forward slash.
 Path="W:/DRGS project/#541 3-22-25/Time Lapse/Final FOV/Functional/Doubles/Split/"; // save location of processed files
 zstacks=4; //user input required 
 channels=2; //user input required
@@ -195,7 +195,7 @@ for (i=0; i<list.length; i++) {
 	}
 	run("Close All");
 	close("*");
-	print("File#",[i+1]," Finished");
+	print("File#",(i+1)," Finished");
 	runMacro("Garbage");
 }
 print("All Files Completed");
