@@ -42,8 +42,9 @@ ________________________________________________________________________________
 Basic operations of this macro
 1.	Open the tiffs in the experimental folder
 2.	If the are 2 files, open and concat them into a single file
-3.	Rearrange the stacks from XYZTC into a more common XYCZT
-4.	Remove blank frames from end of recording and round to the nearest volume
-5.	Remove any bad z-planes e.g. a flyback frame. (optional, and needs to be turned on or off)
-6.	Break the files into pieces smaller than 4 gb. This is necessary for Suite2p as it wants files in a MultiPage TIFF format and if the files are >4gb ImageJ saves them as a SinglePage format. If the files are not <4gb suite2p will not ‘see’ them.
-7.	Save the split files as _001, 002, 003, etc.
+3.	Check to see if there are 2 or 3 channels in a specific channel. If there are 3 channels, remove the 3rd channel (i.e. the reference channel which gets left on occasionally)
+4.	Rearrange the stacks from XYZTC into a more common XYCZT
+5.	Remove blank frames from end of recording and round to the nearest volume
+6.	Remove any bad z-planes e.g. a flyback frame. (optional, and needs to be turned on or off)
+7.	Break the files into pieces smaller than 4 gb. This is necessary for Suite2p as it wants files in a MultiPage TIFF format and if the files are >4gb ImageJ saves them as a SinglePage format. If the files are not <4gb suite2p will not ‘see’ them.
+8.	Save the split files as _001, 002, 003, etc.
