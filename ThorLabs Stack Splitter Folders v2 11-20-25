@@ -1,8 +1,8 @@
 //Before using make sure to copy the Garbage.ijm macro into the macro folder in order to remove the memory leaks
 //Also before using, go to Bio-Foramts Plugin Configuration, go to Formats tab, find TIFF (tagged image file format) and uncheck enable
 //save location. Need to change this depending on the computer and intention
-input="W:/DRGS project/#541 3-22-25/Time Lapse/Final FOV/Functional/Doubles/raw Doubles/" //where the files to process are located. Make sure they are forward slashes and it ends with a forward slash.
-Path="W:/DRGS project/#541 3-22-25/Time Lapse/Final FOV/Functional/Doubles/Split/"; // save location of processed files
+input="//Shadowfax/Warwick/DRGS project/#551 11-16-25/2p/SDH/Final FOV/Functional/Raw/" //where the files to process are located. Make sure they are forward slashes and it ends with a forward slash.
+Path="//Shadowfax/Warwick/DRGS project/#551 11-16-25/2p/SDH/Final FOV/Functional/Split/"; // save location of processed files
 zstacks=4; //user input required 
 channels=2; //user input required
 //Remove any Z-planes (e.g. flyback issues)? Enter the relevant values here. This assumes 2 channels.
@@ -69,17 +69,31 @@ for (i=0; i<list.length; i++) {
 	}
 
 	//Rearrange the stacks from XYZTC into a more common XYCZT
-	run("Stack Splitter", "number=2");  //For ThorImage, first half is Gcamp, second half is red channel
-	close(OriginalFileName);
-	runMacro("Garbage");
-	B="stk_0001_"+OG_filename;
-	C="stk_0002_"+OG_filename;
+	
+	//Check to see if there is a 3rd channel unexpectedly
+	npath=tempfile+"ChanD_Preview.tif";
+	if(File.exists(npath)) {
+		run("Stack Splitter", "number=3");  //For ThorImage, first half is Gcamp, second half is red channel, 3rd half is the reference
+		close(OriginalFileName);
+		runMacro("Garbage");
+		B="stk_0001_"+OG_filename;
+		C="stk_0002_"+OG_filename;
+		D="stk_0003_"+OG_filename;
+		close(D);
+	}
+	else {
+		run("Stack Splitter", "number=2");  //For ThorImage, first half is Gcamp, second half is red channel
+		close(OriginalFileName);
+		runMacro("Garbage");
+		B="stk_0001_"+OG_filename;
+		C="stk_0002_"+OG_filename;
+	}
+	
 	run("Interleave", "stack_1=C stack_2=B"); //interleaving the two channels to make it XYCZT
 	Stack.getDimensions(Wd,Ht,Ch,Sl,F);
 	close("Stk*");
 	File.rename(tempfile, input+list[i]);
 	runMacro("Garbage");
-	
 	//remove blank frames from end of recording
 	Stack.getDimensions(Wd,Ht,Ch,Sl,F);
 	//print("slices=",Sl,"Frames=",F);
